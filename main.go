@@ -2,7 +2,7 @@ package main
 
 import (
 	// "context"
-	"fmt"
+	// "fmt"
 
 	"tinygo.org/x/bluetooth"
 )
@@ -12,15 +12,24 @@ var adapter = bluetooth.DefaultAdapter
 func main() {
   	// Enable BLE interface.
 	must("enable BLE stack", adapter.Enable())
+	// adapter.address.String()
 	println("scanning...")
-	opts := bluetooth.ConnectionParams{}
-	 
-	err := adapter.Scan(func(adapter *bluetooth.Adapter, device bluetooth.ScanResult) {
+	// opts := bluetooth.ConnectionParams{
+	// 	ConnectionTimeout: 1,
+	// 	MinInterval: 1,
+	// 	MaxInterval: 1,
+	// 	Timeout: 1,
+	// }
+	// fmt.Println("ME: ", bluetooth.)
+	adapter.Scan(func(adapter *bluetooth.Adapter, device bluetooth.ScanResult) {
 		println("found device:", device.Address.String(), device.RSSI, device.LocalName())
-		peripheral, connectionErr := adapter.Connect(device.Address, opts)
-		println("connection attempt: ", peripheral.Address.String(), connectionErr.Error())
+		// adapter.SetConnectHandler(func (dev bluetooth.Device, connected bool) {
+		// 	fmt.Println("connected? ", connected)
+		// })
+		// peripheral, connectionErr := adapter.Connect(device.Address, opts)
+		// println("connection attempt: ", peripheral.Address.String(), connectionErr.Error())
 	})
-	fmt.Println(err.Error())
+	// fmt.Println(err.Error())
 	// ctx, cancel := context.WithCancel(context.Background())
 	// adapter.SetConnectHandler(func(device bluetooth.Device, connected bool) {
 	// 	if connected {
